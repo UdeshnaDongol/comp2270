@@ -1,16 +1,3 @@
-import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, View, Text, Image, Picker, Button } from 'react-native';
-
-export default function App() {
-  const [selectedDog, setSelectedDog] = useState("");
-  const [selectedService, setSelectedService] = useState("");
-  const [dogHours, setDogHours] = useState("");
-  const [serviceQty, setServiceQty] = useState("");
-  const [totalPrice, setTotalPrice] = useState(0);
-
-  const extractPrice = (item) => {
-    const match = item.match(/\$(\d+)/);  //look for a dollar sign (the \ escapes it so it’s treated as a real $).(\d+) → capture one or more digits (\d means digit, + means "1 or more").//
-    return match ? parseInt(match[1], 10) : 0;  
   };              //parseInt(match[1], 10) turns "18" (a string) into 18 (a number).if no match is found (e.g., string doesn’t contain $ and digits), it returns 0.//
 
   const handleCalculate = () => {
@@ -93,7 +80,13 @@ export default function App() {
       </View>
 
       <Text style={styles.totalText}>Total Cost is: $ {totalPrice}</Text>
+
+<Text style={styles.developerText}>
+  App developed by Udeshna, Andrew and Afnan and Khushi
+</Text>
+
     </SafeAreaView>
+    
   );
 }
 
