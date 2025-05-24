@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, View, Text, Image, Button } from 'react-native';
+import { SafeAreaView, StyleSheet, View, Text, Image, Button, Platform } from 'react-native';
 import { Picker } from '@react-native-picker/picker';  
 
 export default function App() {
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   },
   picker: {
     flex: 1,
-    height: 40,
+    height: Platform.OS == 'ios' ? 50 : Platform.OS == 'android' ? 60 : 40, // platform specific heights
     marginHorizontal: 5,
     backgroundColor: '#ffffff',
   },
