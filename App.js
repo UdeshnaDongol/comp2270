@@ -1,4 +1,20 @@
+import React, { useState } from "react";
+import { SafeAreaView, StyleSheet, View, Text, Image, Picker, Button } from 'react-native';
+
+
+export default function App() {
+  const [selectedDog, setSelectedDog] = useState("");
+  const [selectedService, setSelectedService] = useState("");
+  const [dogHours, setDogHours] = useState("");
+  const [serviceQty, setServiceQty] = useState("");
+  const [totalPrice, setTotalPrice] = useState(0);
+
+
+  const extractPrice = (item) => {
+    const match = item.match(/\$(\d+)/);  //look for a dollar sign (the \ escapes it so it’s treated as a real $).(\d+) → capture one or more digits (\d means digit, + means "1 or more").//
+    return match ? parseInt(match[1], 10) : 0;  
   };              //parseInt(match[1], 10) turns "18" (a string) into 18 (a number).if no match is found (e.g., string doesn’t contain $ and digits), it returns 0.//
+
 
   const handleCalculate = () => {
     if (!selectedDog || !selectedService || !dogHours || !serviceQty) {
@@ -10,14 +26,17 @@
     setTotalPrice(dogPrice + servicePrice);
   };
 
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.heading}>Sigma Dog Care System (SDCS)</Text>
+
 
       <Image
         source={{ uri: 'https://s10443.pcdn.co/wp-content/uploads/2018/01/GettyImages-847808270-1.jpg' }}
         style={styles.image}
       />
+
 
       <View style={styles.row}>
         <Picker
@@ -33,6 +52,7 @@
           <Picker.Item label="Buddy - $20" value="Buddy-$20" />
         </Picker>
 
+
         <Picker
           selectedValue={dogHours}
           style={styles.picker}
@@ -46,6 +66,7 @@
           <Picker.Item label="5" value="5" />
         </Picker>
       </View>
+
 
       <View style={styles.row}>
         <Picker
@@ -61,6 +82,7 @@
           <Picker.Item label="Daycare - $10" value="Daycare-$10" />
         </Picker>
 
+
         <Picker
           selectedValue={serviceQty}
           style={styles.picker}
@@ -75,20 +97,24 @@
         </Picker>
       </View>
 
+
       <View style={styles.buttonContainer}>
         <Button title="CALCULATE" onPress={handleCalculate} color="#3399ff" />
       </View>
 
-      <Text style={styles.totalText}>Total Cost is: $ {totalPrice}</Text>
 
-<Text style={styles.developerText}>
+      <Text style={styles.totalText}>Total Cost is: $ {totalPrice}</Text>
+   <Text style={styles.developerText}>
   App developed by Udeshna, Andrew and Afnan and Khushi
-</Text>
+  </Text>
+
+
+
 
     </SafeAreaView>
-    
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -133,3 +159,8 @@ const styles = StyleSheet.create({
     color: '#000000',
   },
 });
+
+
+
+
+
