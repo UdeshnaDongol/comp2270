@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, View, Text, Image, Picker, Button } from 'react-native';
-
+import { SafeAreaView, StyleSheet, View, Text, Image, Button } from 'react-native';
+import { Picker } from '@react-native-picker/picker';  
 
 export default function App() {
   const [selectedDog, setSelectedDog] = useState("");
@@ -9,34 +9,29 @@ export default function App() {
   const [serviceQty, setServiceQty] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
 
-
   const extractPrice = (item) => {
-    const match = item.match(/\$(\d+)/);  //look for a dollar sign (the \ escapes it so it’s treated as a real $).(\d+) → capture one or more digits (\d means digit, + means "1 or more").//
-    return match ? parseInt(match[1], 10) : 0;  
-  };              //parseInt(match[1], 10) turns "18" (a string) into 18 (a number).if no match is found (e.g., string doesn’t contain $ and digits), it returns 0.//
-
+    const match = item.match(/\$(\d+)/);
+    return match ? parseInt(match[1], 10) : 0;
+  };
 
   const handleCalculate = () => {
     if (!selectedDog || !selectedService || !dogHours || !serviceQty) {
-    setTotalPrice(0);
-    return;
-  }
+      setTotalPrice(0);
+      return;
+    }
     const dogPrice = extractPrice(selectedDog) * parseInt(dogHours);
     const servicePrice = extractPrice(selectedService) * parseInt(serviceQty);
     setTotalPrice(dogPrice + servicePrice);
   };
 
-
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.heading}>Sigma Dog Care System (SDCS)</Text>
-
 
       <Image
         source={{ uri: 'https://s10443.pcdn.co/wp-content/uploads/2018/01/GettyImages-847808270-1.jpg' }}
         style={styles.image}
       />
-
 
       <View style={styles.row}>
         <Picker
@@ -52,7 +47,6 @@ export default function App() {
           <Picker.Item label="Buddy - $20" value="Buddy-$20" />
         </Picker>
 
-
         <Picker
           selectedValue={dogHours}
           style={styles.picker}
@@ -66,7 +60,6 @@ export default function App() {
           <Picker.Item label="5" value="5" />
         </Picker>
       </View>
-
 
       <View style={styles.row}>
         <Picker
@@ -82,7 +75,6 @@ export default function App() {
           <Picker.Item label="Daycare - $10" value="Daycare-$10" />
         </Picker>
 
-
         <Picker
           selectedValue={serviceQty}
           style={styles.picker}
@@ -97,29 +89,23 @@ export default function App() {
         </Picker>
       </View>
 
-
       <View style={styles.buttonContainer}>
-        <Button title="CALCULATE" onPress={handleCalculate} color="#3399ff" />
+        <Button title="CALCULATE" onPress={handleCalculate} color="#FFA726" /> {/* Changed color here */}
       </View>
 
-
       <Text style={styles.totalText}>Total Cost is: $ {totalPrice}</Text>
-   <Text style={styles.developerText}>
-  App developed by Udeshna, Andrew and Afnan and Khushi
-  </Text>
 
-
-
-
+      <Text style={styles.developerText}>
+        App developed by Udeshna, Andrew, Afnan, and Khushi
+      </Text>
     </SafeAreaView>
   );
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffcc',
+    backgroundColor: '#FFF8E1', 
     alignItems: 'center',
     paddingTop: 40,
   },
@@ -128,6 +114,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'Times New Roman',
     marginBottom: 10,
+    color: '#FFA726', // applied orange to heading text
   },
   image: {
     width: 300,
@@ -135,7 +122,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 15,
     borderWidth: 3,
-    borderColor: 'orange',
+    borderColor: '#FFA726', // applied orange to image border
   },
   row: {
     flexDirection: 'row',
@@ -158,9 +145,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#000000',
   },
+  developerText: {
+    marginTop: 20,
+    fontSize: 12,
+    color: '#888',
+  },
 });
-
-
-
-
-
